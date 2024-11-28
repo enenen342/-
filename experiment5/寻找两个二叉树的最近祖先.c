@@ -4,20 +4,20 @@
 #define MAXSIZE 100
 
 typedef struct {
-    char data[MAXSIZE];  // Ë³Ğò´æ´¢µÄÊı×é
-    int size;            // µ±Ç°Ê÷µÄ½ÚµãÊı
+    char data[MAXSIZE];  // é¡ºåºå­˜å‚¨çš„æ•°ç»„
+    int size;            // å½“å‰æ ‘çš„èŠ‚ç‚¹æ•°
 } SeqBinaryTree;
 
 typedef struct TreeNode {
     char data;
     struct TreeNode *left;
     struct TreeNode *right;
-} TreeNode;  // ¶ş²æÊ÷½Úµã
+} TreeNode;  // äºŒå‰æ ‘èŠ‚ç‚¹
 
-// ´´½¨ĞÂ½Úµã
+// åˆ›å»ºæ–°èŠ‚ç‚¹
 TreeNode* createNode(char data) {
     if (data == '@') {
-        return NULL; // '@' ±íÊ¾¿Õ½Úµã
+        return NULL; // '@' è¡¨ç¤ºç©ºèŠ‚ç‚¹
     }
     TreeNode* newNode = (TreeNode*)malloc(sizeof(TreeNode));
     newNode->data = data;
@@ -26,7 +26,7 @@ TreeNode* createNode(char data) {
     return newNode;
 }
 
-// ÓÃÓÚÊÍ·ÅÕû¸ö¶ş²æÊ÷µÄ½Úµã
+// ç”¨äºé‡Šæ”¾æ•´ä¸ªäºŒå‰æ ‘çš„èŠ‚ç‚¹
 void freeTree(TreeNode* root) {
     if (root == NULL) {
         return;
@@ -36,37 +36,37 @@ void freeTree(TreeNode* root) {
     free(root);
 }
 
-// Ë³Ğò´æ´¢µÄ¶ş²æÊ÷´´½¨
+// é¡ºåºå­˜å‚¨çš„äºŒå‰æ ‘åˆ›å»º
 void createSeqBinaryTree(SeqBinaryTree *tree) {
     int i = 0;
     char ch;
-    printf("ÇëÊäÈë½ÚµãµÄÖµ °´²ã´ÎË³ĞòÊäÈë£¬@±íÊ¾¿Õ½Úµã£¬ÒÔ#½áÊøÊäÈë\n");
+    printf("è¯·è¾“å…¥èŠ‚ç‚¹çš„å€¼ æŒ‰å±‚æ¬¡é¡ºåºè¾“å…¥ï¼Œ@è¡¨ç¤ºç©ºèŠ‚ç‚¹ï¼Œä»¥#ç»“æŸè¾“å…¥\n");
     while (1) {
-        printf("½Úµã %d µÄÖµ£º", i + 1);
+        printf("èŠ‚ç‚¹ %d çš„å€¼ï¼š", i + 1);
         ch = getchar();
-        getchar();  // ¶ÁÈ¡²¢¶ªÆú»»ĞĞ·û£¬·ÀÖ¹»º³åÇø¸ÉÈÅ
+        getchar();  // è¯»å–å¹¶ä¸¢å¼ƒæ¢è¡Œç¬¦ï¼Œé˜²æ­¢ç¼“å†²åŒºå¹²æ‰°
         if (ch == '#') 
             break;
         tree->data[i] = ch;
-        tree->size = i + 1; // ¸üĞÂÊ÷µÄÊµ¼Ê´óĞ¡
+        tree->size = i + 1; // æ›´æ–°æ ‘çš„å®é™…å¤§å°
         i++;
     }
 }
 
-// ¸ù¾İÊı×éÊı¾İµİ¹é´´½¨¶ş²æÊ÷
+// æ ¹æ®æ•°ç»„æ•°æ®é€’å½’åˆ›å»ºäºŒå‰æ ‘
 TreeNode* createBinaryTreeFromArray(char arr[], int index, int size) {
     if (index >= size || arr[index] == '@') {
         return NULL;
     }
 
     TreeNode* root = createNode(arr[index]);
-    root->left = createBinaryTreeFromArray(arr, 2 * index + 1, size);  // ×óº¢×ÓË÷Òı 2 * index + 1
-    root->right = createBinaryTreeFromArray(arr, 2 * index + 2, size); // ÓÒº¢×ÓË÷Òı 2 * index + 2
+    root->left = createBinaryTreeFromArray(arr, 2 * index + 1, size);  // å·¦å­©å­ç´¢å¼• 2 * index + 1
+    root->right = createBinaryTreeFromArray(arr, 2 * index + 2, size); // å³å­©å­ç´¢å¼• 2 * index + 2
 
     return root;
 }
 
-// ²éÕÒ¶ş²æÊ÷ÖĞµÄ½Úµã
+// æŸ¥æ‰¾äºŒå‰æ ‘ä¸­çš„èŠ‚ç‚¹
 TreeNode* findnode(TreeNode* root, char target) {
     if (root == NULL || root->data == target) {
         return root;
@@ -80,7 +80,7 @@ TreeNode* findnode(TreeNode* root, char target) {
     return findnode(root->right, target);
 }
 
-// ²éÕÒÁ½¸ö½ÚµãµÄ×îµÍ¹«¹²×æÏÈ
+// æŸ¥æ‰¾ä¸¤ä¸ªèŠ‚ç‚¹çš„æœ€ä½å…¬å…±ç¥–å…ˆ
 TreeNode* findLowestCommonAncestor(TreeNode* root, TreeNode* node1, TreeNode* node2) {
     if (root == NULL || root == node1 || root == node2) {
         return root;
@@ -99,18 +99,18 @@ TreeNode* findLowestCommonAncestor(TreeNode* root, TreeNode* node1, TreeNode* no
 int main() {
     SeqBinaryTree *tree = (SeqBinaryTree *)malloc(sizeof(SeqBinaryTree));
     tree->size = 0;
-    createSeqBinaryTree(tree);  // ÓÃË³Ğò´æ´¢½¨Á¢¶ş²æÊ÷
+    createSeqBinaryTree(tree);  // ç”¨é¡ºåºå­˜å‚¨å»ºç«‹äºŒå‰æ ‘
     
-    TreeNode* tree2 = createBinaryTreeFromArray(tree->data, 0, tree->size);  // ÀûÓÃË³Ğò´æ´¢µÄÊı¾İ½¨Á¢Á´Ê½¶ş²æÊ÷
+    TreeNode* tree2 = createBinaryTreeFromArray(tree->data, 0, tree->size);  // åˆ©ç”¨é¡ºåºå­˜å‚¨çš„æ•°æ®å»ºç«‹é“¾å¼äºŒå‰æ ‘
     
-    printf("ÊäÈëpºÍq:\n");
+    printf("è¾“å…¥på’Œq:\n");
     char p, q;
-    scanf(" %c %c", &p, &q);  // È·±£»º³åÇøÎŞ¸ÉÈÅ¶ÁÈ¡
+    scanf(" %c %c", &p, &q);  // ç¡®ä¿ç¼“å†²åŒºæ— å¹²æ‰°è¯»å–
     
     TreeNode* node1 = findnode(tree2, p);
     TreeNode* node2 = findnode(tree2, q);
     if (node1 == NULL || node2 == NULL) {
-        printf("Î´ÕÒµ½½Úµã %c »ò½Úµã %c\n", p, q);
+        printf("æœªæ‰¾åˆ°èŠ‚ç‚¹ %c æˆ–èŠ‚ç‚¹ %c\n", p, q);
         free(tree);
         freeTree(tree2);
         return 1;
@@ -119,12 +119,12 @@ int main() {
     TreeNode* result = findLowestCommonAncestor(tree2, node1, node2);
     
     if (result != NULL) {
-        printf("½Úµã %c ºÍ ½Úµã %c µÄ×îµÍ¹«¹²×æÏÈÊÇ: %c\n", p, q, result->data);
+        printf("èŠ‚ç‚¹ %c å’Œ èŠ‚ç‚¹ %c çš„æœ€ä½å…¬å…±ç¥–å…ˆæ˜¯: %c\n", p, q, result->data);
     } else {
-        printf("Î´ÕÒµ½¹«¹²×æÏÈ¡£\n");
+        printf("æœªæ‰¾åˆ°å…¬å…±ç¥–å…ˆã€‚\n");
     }
     
     free(tree);
-    freeTree(tree2);  // µİ¹éÊÍ·ÅÕû¸öÁ´Ê½¶ş²æÊ÷
+    freeTree(tree2);  // é€’å½’é‡Šæ”¾æ•´ä¸ªé“¾å¼äºŒå‰æ ‘
     return 0;
 }
