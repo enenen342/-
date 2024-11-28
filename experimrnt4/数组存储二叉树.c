@@ -7,11 +7,11 @@ typedef struct TreeNode {
     struct TreeNode *right;
 } TreeNode;
 
-// ´´½¨ĞÂ½Úµã
+// åˆ›å»ºæ–°èŠ‚ç‚¹
 TreeNode* createNode(int data) {
     TreeNode* newNode = (TreeNode*)malloc(sizeof(TreeNode));
     if (newNode == NULL) {
-        printf("ÄÚ´æ·ÖÅäÊ§°Ü\n");
+        printf("å†…å­˜åˆ†é…å¤±è´¥\n");
         exit(1);
     }
     newNode->data = data;
@@ -20,10 +20,10 @@ TreeNode* createNode(int data) {
     return newNode;
 }
 
-// µİ¹é¹¹½¨¶ş²æÊ÷£¬ÊäÈë -1 ±íÊ¾¿Õ½Úµã
+// é€’å½’æ„å»ºäºŒå‰æ ‘ï¼Œè¾“å…¥ -1 è¡¨ç¤ºç©ºèŠ‚ç‚¹
 TreeNode* createBinaryTree() {
     char data;
-    printf("ÊäÈë½ÚµãÊı¾İ @±íÊ¾¿Õ½Úµã£©£º");
+    printf("è¾“å…¥èŠ‚ç‚¹æ•°æ® @è¡¨ç¤ºç©ºèŠ‚ç‚¹ï¼‰ï¼š");
     scanf("%d", &data);
 
     if (data == -1) {
@@ -31,9 +31,9 @@ TreeNode* createBinaryTree() {
     }
 
     TreeNode* node = createNode(data);
-    printf("ÊäÈë %d µÄ×ó×Ó½Úµã\n", data);
+    printf("è¾“å…¥ %d çš„å·¦å­èŠ‚ç‚¹\n", data);
     node->left = createBinaryTree();
-    printf("ÊäÈë %d µÄÓÒ×Ó½Úµã\n", data);
+    printf("è¾“å…¥ %d çš„å³å­èŠ‚ç‚¹\n", data);
     node->right = createBinaryTree();
 
     return node;
@@ -44,10 +44,10 @@ TreeNode* createBinaryTree() {
 int main() {
     TreeNode* root = NULL;
 
-    printf("¿ªÊ¼´´½¨¶ş²æÊ÷£º\n");
+    printf("å¼€å§‹åˆ›å»ºäºŒå‰æ ‘ï¼š\n");
     root = createBinaryTree();
 
-    printf("Ç°Ğò±éÀú½á¹û£º");
+    printf("å‰åºéå†ç»“æœï¼š");
     
     printf("\n");
 
