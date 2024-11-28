@@ -1,34 +1,34 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define N 6  // Ò¶×Ó½ÚµãÊı
-#define M 11 // ×Ü½ÚµãÊı£¨2N-1£©
+#define N 6  // å¶å­èŠ‚ç‚¹æ•°
+#define M 11 // æ€»èŠ‚ç‚¹æ•°ï¼ˆ2N-1ï¼‰
 
-// ¹ş·òÂüÊ÷½Úµã
+// å“ˆå¤«æ›¼æ ‘èŠ‚ç‚¹
 typedef struct {
-    float weight;   // È¨ÖØ
-    int parent;     // ¸¸½ÚµãË÷Òı
-    int lchild;     // ×ó×Ó½ÚµãË÷Òı
-    int rchild;     // ÓÒ×Ó½ÚµãË÷Òı
-    char data;      // Êı¾İ
+    float weight;   // æƒé‡
+    int parent;     // çˆ¶èŠ‚ç‚¹ç´¢å¼•
+    int lchild;     // å·¦å­èŠ‚ç‚¹ç´¢å¼•
+    int rchild;     // å³å­èŠ‚ç‚¹ç´¢å¼•
+    char data;      // æ•°æ®
 } hafuman;
 
-// ¹ş·òÂü±àÂë±í
+// å“ˆå¤«æ›¼ç¼–ç è¡¨
 typedef struct {
-    char bit[N];    // ±àÂëÊı×é
-    int start;      // ±àÂëÆğÊ¼Î»ÖÃ
-    char data;      // ¶ÔÓ¦Êı¾İ
+    char bit[N];    // ç¼–ç æ•°ç»„
+    int start;      // ç¼–ç èµ·å§‹ä½ç½®
+    char data;      // å¯¹åº”æ•°æ®
 } hafumancode;
 
 hafumancode code[N];
 hafuman tree[M];
 
-// ¹¹½¨¹ş·òÂüÊ÷
+// æ„å»ºå“ˆå¤«æ›¼æ ‘
 void CreateHafuman(hafuman tree[], float weights[], char datas[]) {
     int i, j, p1, p2;
     float small1, small2;
 
-    // ³õÊ¼»¯¹ş·òÂüÊ÷
+    // åˆå§‹åŒ–å“ˆå¤«æ›¼æ ‘
     for (i = 0; i < M; i++) {
         tree[i].weight = 0.0;
         tree[i].parent = -1;
@@ -37,20 +37,20 @@ void CreateHafuman(hafuman tree[], float weights[], char datas[]) {
         tree[i].data = '\0';
     }
 
-    // ³õÊ¼»¯Ò¶×Ó½Úµã
+    // åˆå§‹åŒ–å¶å­èŠ‚ç‚¹
     for (i = 0; i < N; i++) {
         tree[i].weight = weights[i];
         tree[i].data = datas[i];
     }
 
-    // ¹¹½¨¹ş·òÂüÊ÷
+    // æ„å»ºå“ˆå¤«æ›¼æ ‘
     for (i = N; i < M; i++) {
-        small1 = small2 = 1e9; // ³õÊ¼»¯Îª½Ï´óµÄÖµ
+        small1 = small2 = 1e9; // åˆå§‹åŒ–ä¸ºè¾ƒå¤§çš„å€¼
         p1 = p2 = -1;
 
-        // ÕÒµ½Á½¸öÈ¨Öµ×îĞ¡µÄ½Úµã
+        // æ‰¾åˆ°ä¸¤ä¸ªæƒå€¼æœ€å°çš„èŠ‚ç‚¹
         for (j = 0; j < i; j++) {
-            if (tree[j].parent == -1) { // ½ÚµãÎ´±»Ñ¡ÖĞ
+            if (tree[j].parent == -1) { // èŠ‚ç‚¹æœªè¢«é€‰ä¸­
                 if (tree[j].weight < small1) {
                     small2 = small1;
                     p2 = p1;
@@ -63,7 +63,7 @@ void CreateHafuman(hafuman tree[], float weights[], char datas[]) {
             }
         }
 
-        // ºÏ²¢½Úµã
+        // åˆå¹¶èŠ‚ç‚¹
         tree[p1].parent = i;
         tree[p2].parent = i;
         tree[i].lchild = p1;
@@ -72,7 +72,7 @@ void CreateHafuman(hafuman tree[], float weights[], char datas[]) {
     }
 }
 
-// ¹ş·òÂü±àÂë
+// å“ˆå¤«æ›¼ç¼–ç 
 void HafmanEncode(hafuman tree[], hafumancode code[]) {
     int i, c, p;
 
@@ -92,13 +92,13 @@ void HafmanEncode(hafuman tree[], hafumancode code[]) {
             c = p;
             p = tree[p].parent;
         }
-        code[i].bit[N] = '\0'; // È·±£±àÂë×Ö·û´®ÒÔ '\0' ½áÎ²
+        code[i].bit[N] = '\0'; // ç¡®ä¿ç¼–ç å­—ç¬¦ä¸²ä»¥ '\0' ç»“å°¾
     }
 }
 
-// ¹ş·òÂüÒëÂë
+// å“ˆå¤«æ›¼è¯‘ç 
 void HafumanDecode(hafuman tree[], char *codes) {
-    int i = M - 1; // ´Ó¸ù½Úµã¿ªÊ¼
+    int i = M - 1; // ä»æ ¹èŠ‚ç‚¹å¼€å§‹
     int idx = 0;
 
     while (codes[idx] != '\0') {
@@ -108,19 +108,19 @@ void HafumanDecode(hafuman tree[], char *codes) {
             i = tree[i].rchild;
         }
 
-        // Èç¹ûÊÇÒ¶×Ó½Úµã£¬Êä³ö×Ö·û
+        // å¦‚æœæ˜¯å¶å­èŠ‚ç‚¹ï¼Œè¾“å‡ºå­—ç¬¦
         if (tree[i].lchild == -1 && tree[i].rchild == -1) {
             putchar(tree[i].data);
-            i = M - 1; // »Øµ½¸ù½Úµã
+            i = M - 1; // å›åˆ°æ ¹èŠ‚ç‚¹
         }
         idx++;
     }
     putchar('\n');
 }
 
-// ´òÓ¡¹ş·òÂü±àÂë
+// æ‰“å°å“ˆå¤«æ›¼ç¼–ç 
 void PrintHufmanCodes(hafumancode code[]) {
-    printf("×Ö·û | ¹ş·òÂü±àÂë\n");
+    printf("å­—ç¬¦ | å“ˆå¤«æ›¼ç¼–ç \n");
     printf("----------------\n");
     for (int i = 0; i < N; i++) {
         printf("  %c  | ", code[i].data);
@@ -131,7 +131,7 @@ void PrintHufmanCodes(hafumancode code[]) {
     }
 }
 
-// ´òÓ¡¹ş·òÂüÊ÷
+// æ‰“å°å“ˆå¤«æ›¼æ ‘
 void PrintHufmanTree(hafuman tree[]) {
     printf("Index\tWeight\tParent\tLChild\tRChild\tData\n");
     for (int i = 0; i < M; i++) {
@@ -141,20 +141,20 @@ void PrintHufmanTree(hafuman tree[]) {
     }
 }
 
-// Ö÷º¯Êı
+// ä¸»å‡½æ•°
 int main() {
-    float weights[N] = {5, 9, 12, 13, 16, 45}; // È¨ÖØ
-    char datas[N] = {'a', 'b', 'c', 'd', 'e', 'f'}; // Êı¾İ
+    float weights[N] = {5, 9, 12, 13, 16, 45}; // æƒé‡
+    char datas[N] = {'a', 'b', 'c', 'd', 'e', 'f'}; // æ•°æ®
 
-    CreateHafuman(tree, weights, datas); // ´´½¨¹ş·òÂüÊ÷
-    PrintHufmanTree(tree); // ´òÓ¡¹ş·òÂüÊ÷
+    CreateHafuman(tree, weights, datas); // åˆ›å»ºå“ˆå¤«æ›¼æ ‘
+    PrintHufmanTree(tree); // æ‰“å°å“ˆå¤«æ›¼æ ‘
 
-    HafmanEncode(tree, code); // ±àÂë
-    PrintHufmanCodes(code); // Êä³ö±àÂë½á¹û
+    HafmanEncode(tree, code); // ç¼–ç 
+    PrintHufmanCodes(code); // è¾“å‡ºç¼–ç ç»“æœ
 
-    char encoded[] = "110011011001011110"; // ¶ÔÓ¦ "abcdef"
-    printf("\n½âÂë½á¹û: ");
-    HafumanDecode(tree, encoded); // Êä³ö½âÂë½á¹û
+    char encoded[] = "110011011001011110"; // å¯¹åº” "abcdef"
+    printf("\nè§£ç ç»“æœ: ");
+    HafumanDecode(tree, encoded); // è¾“å‡ºè§£ç ç»“æœ
 
     return 0;
 }
