@@ -4,8 +4,8 @@
 #define MAXSIZE 100
 
 typedef struct {
-    char data[MAXSIZE];  // Ë³Ğò´æ´¢µÄÊı×é
-    int size;           // µ±Ç°Ê÷µÄ½ÚµãÊı
+    char data[MAXSIZE];  // é¡ºåºå­˜å‚¨çš„æ•°ç»„
+    int size;           // å½“å‰æ ‘çš„èŠ‚ç‚¹æ•°
 } SeqBinaryTree;
 
 typedef struct TreeNode {
@@ -14,10 +14,10 @@ typedef struct TreeNode {
     struct TreeNode *right;
 } TreeNode;
 
-// ´´½¨ĞÂ½Úµã
+// åˆ›å»ºæ–°èŠ‚ç‚¹
 TreeNode* createNode(char data) {
     if (data == '@') {
-        return NULL; // -1 ±íÊ¾¿Õ½Úµã
+        return NULL; // -1 è¡¨ç¤ºç©ºèŠ‚ç‚¹
     }
     TreeNode* newNode = (TreeNode*)malloc(sizeof(TreeNode));
     newNode->data = data;
@@ -31,34 +31,34 @@ void createSeqBinaryTree(SeqBinaryTree *tree)
 {
     int value, i = 1;
     char ch;
-    printf("ÇëÊäÈë½ÚµãµÄÖµ °´²ã´ÎË³ĞòÊäÈë£¬@±íÊ¾¿Õ½Úµã£¬ÒÔ#½áÊøÊäÈë\n");
+    printf("è¯·è¾“å…¥èŠ‚ç‚¹çš„å€¼ æŒ‰å±‚æ¬¡é¡ºåºè¾“å…¥ï¼Œ@è¡¨ç¤ºç©ºèŠ‚ç‚¹ï¼Œä»¥#ç»“æŸè¾“å…¥\n");
     while (1) 
     {
-        printf("½Úµã %d µÄÖµ£º", i);
+        printf("èŠ‚ç‚¹ %d çš„å€¼ï¼š", i);
         ch = getchar();
         getchar();
         if (ch == '#') 
             break;
         tree->data[i] = ch;
-        tree->size = i + 1; // ¸üĞÂÊ÷µÄÊµ¼Ê´óĞ¡
+        tree->size = i + 1; // æ›´æ–°æ ‘çš„å®é™…å¤§å°
         i++;
     }
 }
 
-// ¸ù¾İÊı×éÊı¾İµİ¹é´´½¨¶ş²æÊ÷
+// æ ¹æ®æ•°ç»„æ•°æ®é€’å½’åˆ›å»ºäºŒå‰æ ‘
 TreeNode* createBinaryTreeFromArray(char arr[], int index, int size) {
     if (index >= size || arr[index] == '@') {
         return NULL;
     }
 
     TreeNode* root = createNode(arr[index]);
-    root->left = createBinaryTreeFromArray(arr, 2 * index + 1, size);  // ×óº¢×ÓË÷Òı 2 * index + 1
-    root->right = createBinaryTreeFromArray(arr, 2 * index + 2, size); // ÓÒº¢×ÓË÷Òı 2 * index + 2
+    root->left = createBinaryTreeFromArray(arr, 2 * index + 1, size);  // å·¦å­©å­ç´¢å¼• 2 * index + 1
+    root->right = createBinaryTreeFromArray(arr, 2 * index + 2, size); // å³å­©å­ç´¢å¼• 2 * index + 2
 
     return root;
 }
 
-void showleftchild(SeqBinaryTree *tree)//Êä³öËùÓĞµÄ×ó×ÓÊ÷
+void showleftchild(SeqBinaryTree *tree)//è¾“å‡ºæ‰€æœ‰çš„å·¦å­æ ‘
 {
     for(int i=0;i<=tree->size;i=2*i+1)
     {
@@ -67,7 +67,7 @@ void showleftchild(SeqBinaryTree *tree)//Êä³öËùÓĞµÄ×ó×ÓÊ÷
         }
     }
 }
-void showrightchild(SeqBinaryTree *tree)//Êä³öËùÓĞÓÒ×ÓÊ÷ 
+void showrightchild(SeqBinaryTree *tree)//è¾“å‡ºæ‰€æœ‰å³å­æ ‘ 
 {
     for(int i=1;i<=tree->size;i=2*i)
     {
@@ -84,9 +84,9 @@ void preorderLeft(TreeNode* root) {
         preorderLeft(root->left);
     }
 }
-// ±éÀú×ó×ÓÊ÷
+// éå†å·¦å­æ ‘
 
-// ±éÀúÓÒ×ÓÊ÷
+// éå†å³å­æ ‘
 void preorderRight(TreeNode* root) {
     if (root != NULL) {
         printf("%c ", root->data);
