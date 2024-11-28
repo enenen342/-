@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// ¶¨ÒåÊ÷½Úµã½á¹¹
+// å®šä¹‰æ ‘èŠ‚ç‚¹ç»“æ„
 typedef struct TreeNode {
     char val;
     struct TreeNode *left;
     struct TreeNode *right;
 } TreeNode;
 
-// ¸¨Öúº¯Êı£º´´½¨ĞÂµÄÊ÷½Úµã
+// è¾…åŠ©å‡½æ•°ï¼šåˆ›å»ºæ–°çš„æ ‘èŠ‚ç‚¹
 TreeNode* createNode(char val) {
     TreeNode* node = (TreeNode*)malloc(sizeof(TreeNode));
     node->val = val;
@@ -17,19 +17,19 @@ TreeNode* createNode(char val) {
     return node;
 }
 
-// ¹¹½¨¶ş²æÊ÷µÄµİ¹éº¯Êı
+// æ„å»ºäºŒå‰æ ‘çš„é€’å½’å‡½æ•°
 TreeNode* buildTree(char* inorder, char* postorder, int inorderStart, int inorderEnd, int* postIndex) {
-    // »ù±¾Çé¿ö
+    // åŸºæœ¬æƒ…å†µ
     if (inorderStart > inorderEnd) {
         return NULL;
     }
 
-    // ºóĞò±éÀúµÄ×îºóÒ»¸öÔªËØÊÇµ±Ç°Ê÷µÄ¸ù½Úµã
+    // ååºéå†çš„æœ€åä¸€ä¸ªå…ƒç´ æ˜¯å½“å‰æ ‘çš„æ ¹èŠ‚ç‚¹
     char rootVal = postorder[*postIndex];
-    (*postIndex)--;  // ÒÆ¶¯ºóĞò±éÀúË÷Òı
+    (*postIndex)--;  // ç§»åŠ¨ååºéå†ç´¢å¼•
     TreeNode* root = createNode(rootVal);
 
-    // ÔÚÖĞĞò±éÀúÖĞ²éÕÒ¸ù½ÚµãµÄÎ»ÖÃ
+    // åœ¨ä¸­åºéå†ä¸­æŸ¥æ‰¾æ ¹èŠ‚ç‚¹çš„ä½ç½®
     int rootIndex;
     for (rootIndex = inorderStart; rootIndex <= inorderEnd; rootIndex++) {
         if (inorder[rootIndex] == rootVal) {
@@ -37,14 +37,14 @@ TreeNode* buildTree(char* inorder, char* postorder, int inorderStart, int inorde
         }
     }
 
-    // ¹¹½¨ÓÒ×ÓÊ÷ºÍ×ó×ÓÊ÷
+    // æ„å»ºå³å­æ ‘å’Œå·¦å­æ ‘
     root->right = buildTree(inorder, postorder, rootIndex + 1, inorderEnd, postIndex);
     root->left = buildTree(inorder, postorder, inorderStart, rootIndex - 1, postIndex);
 
     return root;
 }
 
-// ¸¨Öúº¯Êı£ºÖĞĞò±éÀú£¬ÑéÖ¤½á¹û
+// è¾…åŠ©å‡½æ•°ï¼šä¸­åºéå†ï¼ŒéªŒè¯ç»“æœ
 void inorderTraversal(TreeNode* root) {
     if (root == NULL) return;
     inorderTraversal(root->left);
@@ -52,7 +52,7 @@ void inorderTraversal(TreeNode* root) {
     inorderTraversal(root->right);
 }
 
-// ¸¨Öúº¯Êı£ººóĞò±éÀú£¬ÑéÖ¤½á¹û
+// è¾…åŠ©å‡½æ•°ï¼šååºéå†ï¼ŒéªŒè¯ç»“æœ
 void postorderTraversal(TreeNode* root) {
     if (root == NULL) return;
     postorderTraversal(root->left);
@@ -60,7 +60,7 @@ void postorderTraversal(TreeNode* root) {
     printf("%c ", root->val);
 }
 
-// Ö÷º¯Êı£º²âÊÔ¶ş²æÊ÷¹¹½¨
+// ä¸»å‡½æ•°ï¼šæµ‹è¯•äºŒå‰æ ‘æ„å»º
 int main() {
     char inorder[] = {'D', 'G', 'B', 'A', 'E', 'C', 'H', 'F'};
     char postorder[] = {'G', 'D', 'B', 'E', 'H', 'F', 'C', 'A'};
@@ -68,11 +68,11 @@ int main() {
 
     TreeNode* root = buildTree(inorder, postorder, 0, postIndex, &postIndex);
 
-    printf("¹¹½¨µÄ¶ş²æÊ÷µÄÖĞĞò±éÀú: ");
+    printf("æ„å»ºçš„äºŒå‰æ ‘çš„ä¸­åºéå†: ");
     inorderTraversal(root);
     printf("\n");
 
-    printf("¹¹½¨µÄ¶ş²æÊ÷µÄºóĞò±éÀú: ");
+    printf("æ„å»ºçš„äºŒå‰æ ‘çš„ååºéå†: ");
     postorderTraversal(root);
     printf("\n");
 
