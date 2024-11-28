@@ -26,9 +26,9 @@ void getnext(seqstring *t,int next[MAXSIZE])
             j=next[j];
         }
     }
-}//»ñÈ¡nextÊý×é
+}//èŽ·å–nextæ•°ç»„
 
-int getlen(seqstring *s)//»ñÈ¡³¤¶È
+int getlen(seqstring *s)//èŽ·å–é•¿åº¦
 {
     int cnt=0;
     char *p=s->ch;
@@ -45,7 +45,7 @@ int main()
     seqstring *s = (seqstring *)malloc(sizeof(seqstring));
     seqstring *t = (seqstring *)malloc(sizeof(seqstring));
     strcpy(s->ch, "abbacdcabd");
-    strcpy(t->ch, "cdca"); //¶¨ÒåÄ£Ê½´®ºÍÆ¥Åä´®
+    strcpy(t->ch, "cdca"); //å®šä¹‰æ¨¡å¼ä¸²å’ŒåŒ¹é…ä¸²
     s->len = getlen(s);
     t->len = getlen(t);
     int next[MAXSIZE];
@@ -63,7 +63,7 @@ int main()
             i++;
             j++;
         }
-        else//Èç¹û²»Æ¥Åä ½«nextÊý×éÖÐµÄjÖµ¸³¸øj£¬´Ós->len[j]ÖØÐÂ¿ªÊ¼Æ¥Åä
+        else//å¦‚æžœä¸åŒ¹é… å°†nextæ•°ç»„ä¸­çš„jå€¼èµ‹ç»™jï¼Œä»Žs->len[j]é‡æ–°å¼€å§‹åŒ¹é…
         {
             j=next[j];
         }
