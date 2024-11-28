@@ -1,45 +1,45 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#define MAX_SIZE 1000  // ¶¨ÒåÕ»µÄ×î´ó´óÐ¡
+#define MAX_SIZE 1000  // å®šä¹‰æ ˆçš„æœ€å¤§å¤§å°
 
-// ¶¨ÒåÕ»½á¹¹
+// å®šä¹‰æ ˆç»“æž„
 typedef struct {
     char items[MAX_SIZE];
     int top;
 } Stack;
 
-// ³õÊ¼»¯Õ»
+// åˆå§‹åŒ–æ ˆ
 void initStack(Stack* stack) {
-    stack->top = -1;  // Õ»Îª¿Õ
+    stack->top = -1;  // æ ˆä¸ºç©º
 }
 
-// ¼ì²éÕ»ÊÇ·ñÎª¿Õ
+// æ£€æŸ¥æ ˆæ˜¯å¦ä¸ºç©º
 bool isEmpty(Stack* stack) {
     return stack->top == -1;
 }
 
-// ÈëÕ»²Ù×÷
+// å…¥æ ˆæ“ä½œ
 bool push(Stack* stack, char item) {
     if (stack->top < MAX_SIZE - 1) {
         
         stack->items[++stack->top] = item;
-        // ÈëÕ»
+        // å…¥æ ˆ
         return true;
     }
-    return false;  // Õ»Âú
+    return false;  // æ ˆæ»¡
 }
 
-// ³öÕ»²Ù×÷
+// å‡ºæ ˆæ“ä½œ
 char pop(Stack* stack) {
     if (!isEmpty(stack)) {
         char tmp;
         tmp=stack->items[stack->top];
          stack->top--;
          return tmp;
-         // ³öÕ»
+         // å‡ºæ ˆ
     }
-    return '\0';  // Èç¹ûÕ»Îª¿Õ£¬·µ»Ø¿Õ×Ö·û
+    return '\0';  // å¦‚æžœæ ˆä¸ºç©ºï¼Œè¿”å›žç©ºå­—ç¬¦
 }
 
 bool issym(char *s,int n)
