@@ -4,20 +4,20 @@
 #define MAXSIZE 100
 
 typedef struct {
-    char data[MAXSIZE];  // Ë³Ğò´æ´¢µÄÊı×é
-    int size;            // µ±Ç°Ê÷µÄ½ÚµãÊı
+    char data[MAXSIZE];  // é¡ºåºå­˜å‚¨çš„æ•°ç»„
+    int size;            // å½“å‰æ ‘çš„èŠ‚ç‚¹æ•°
 } SeqBinaryTree;
 
 typedef struct TreeNode {
     char data;
     struct TreeNode *left;
     struct TreeNode *right;
-} TreeNode;  // ¶ş²æÊ÷½Úµã
+} TreeNode;  // äºŒå‰æ ‘èŠ‚ç‚¹
 
-// ´´½¨ĞÂ½Úµã
+// åˆ›å»ºæ–°èŠ‚ç‚¹
 TreeNode* createNode(char data) {
     if (data == '@') {
-        return NULL; // '@' ±íÊ¾¿Õ½Úµã
+        return NULL; // '@' è¡¨ç¤ºç©ºèŠ‚ç‚¹
     }
     TreeNode* newNode = (TreeNode*)malloc(sizeof(TreeNode));
     newNode->data = data;
@@ -26,7 +26,7 @@ TreeNode* createNode(char data) {
     return newNode;
 }
 
-// ÓÃÓÚÊÍ·ÅÕû¸ö¶ş²æÊ÷µÄ½Úµã
+// ç”¨äºé‡Šæ”¾æ•´ä¸ªäºŒå‰æ ‘çš„èŠ‚ç‚¹
 void freeTree(TreeNode* root) {
     if (root == NULL) {
         return;
@@ -36,58 +36,58 @@ void freeTree(TreeNode* root) {
     free(root);
 }
 
-// Ë³Ğò´æ´¢µÄ¶ş²æÊ÷´´½¨
+// é¡ºåºå­˜å‚¨çš„äºŒå‰æ ‘åˆ›å»º
 void createSeqBinaryTree(SeqBinaryTree *tree) {
-    int i = 0;  // ´Ó0¿ªÊ¼Ìî³ä
+    int i = 0;  // ä»0å¼€å§‹å¡«å……
     char ch;
-    printf("ÇëÊäÈë½ÚµãµÄÖµ °´²ã´ÎË³ĞòÊäÈë£¬@±íÊ¾¿Õ½Úµã£¬ÒÔ#½áÊøÊäÈë\n");
+    printf("è¯·è¾“å…¥èŠ‚ç‚¹çš„å€¼ æŒ‰å±‚æ¬¡é¡ºåºè¾“å…¥ï¼Œ@è¡¨ç¤ºç©ºèŠ‚ç‚¹ï¼Œä»¥#ç»“æŸè¾“å…¥\n");
     while (1) {
-        printf("½Úµã %d µÄÖµ£º", i + 1);
+        printf("èŠ‚ç‚¹ %d çš„å€¼ï¼š", i + 1);
         ch = getchar();
-        getchar();  // ¶ÁÈ¡²¢¶ªÆú»»ĞĞ·û£¬·ÀÖ¹»º³åÇø¸ÉÈÅ
+        getchar();  // è¯»å–å¹¶ä¸¢å¼ƒæ¢è¡Œç¬¦ï¼Œé˜²æ­¢ç¼“å†²åŒºå¹²æ‰°
         if (ch == '#') 
             break;
         tree->data[i] = ch;
-        tree->size = i + 1; // ¸üĞÂÊ÷µÄÊµ¼Ê´óĞ¡
+        tree->size = i + 1; // æ›´æ–°æ ‘çš„å®é™…å¤§å°
         i++;
     }
 }
 
-// ¸ù¾İÊı×éÊı¾İµİ¹é´´½¨¶ş²æÊ÷
+// æ ¹æ®æ•°ç»„æ•°æ®é€’å½’åˆ›å»ºäºŒå‰æ ‘
 TreeNode* createBinaryTreeFromArray(char arr[], int index, int size) {
     if (index >= size || arr[index] == '@') {
         return NULL;
     }
 
     TreeNode* root = createNode(arr[index]);
-    root->left = createBinaryTreeFromArray(arr, 2 * index + 1, size);  // ×óº¢×ÓË÷Òı 2 * index + 1
-    root->right = createBinaryTreeFromArray(arr, 2 * index + 2, size); // ÓÒº¢×ÓË÷Òı 2 * index + 2
+    root->left = createBinaryTreeFromArray(arr, 2 * index + 1, size);  // å·¦å­©å­ç´¢å¼• 2 * index + 1
+    root->right = createBinaryTreeFromArray(arr, 2 * index + 2, size); // å³å­©å­ç´¢å¼• 2 * index + 2
 
     return root;
 }
 
-// ¹ã¶È±éÀú
+// å¹¿åº¦éå†
 void Layer(TreeNode* root) {
     if (root == NULL) return;
 
-    // Ê¹ÓÃ¶ÓÁĞÀ´½øĞĞ²ã´Î±éÀú
-    TreeNode* queue[MAXSIZE];  // ¶ÓÁĞ´æ´¢½ÚµãÖ¸Õë
+    // ä½¿ç”¨é˜Ÿåˆ—æ¥è¿›è¡Œå±‚æ¬¡éå†
+    TreeNode* queue[MAXSIZE];  // é˜Ÿåˆ—å­˜å‚¨èŠ‚ç‚¹æŒ‡é’ˆ
     int front = 0, rear = 0;
 
-    // Èë¶Ó¸ù½Úµã
+    // å…¥é˜Ÿæ ¹èŠ‚ç‚¹
     queue[rear++] = root;
 
     while (front < rear) {
-        // ³ö¶Ó
+        // å‡ºé˜Ÿ
         TreeNode* node = queue[front++];
         printf("%c ", node->data);
 
-        // Èë¶Ó×óº¢×Ó
+        // å…¥é˜Ÿå·¦å­©å­
         if (node->left != NULL) {
             queue[rear++] = node->left;
         }
 
-        // Èë¶ÓÓÒº¢×Ó
+        // å…¥é˜Ÿå³å­©å­
         if (node->right != NULL) {
             queue[rear++] = node->right;
         }
@@ -98,18 +98,18 @@ int main() {
     SeqBinaryTree *tree = (SeqBinaryTree *)malloc(sizeof(SeqBinaryTree));
     tree->size = 0;
     
-    // ´´½¨Ë³Ğò´æ´¢µÄÊ÷
+    // åˆ›å»ºé¡ºåºå­˜å‚¨çš„æ ‘
     createSeqBinaryTree(tree);
 
-    // ½«Ë³Ğò´æ´¢µÄÊ÷Êı¾İ×ª»»ÎªÁ´Ê½¶ş²æÊ÷
+    // å°†é¡ºåºå­˜å‚¨çš„æ ‘æ•°æ®è½¬æ¢ä¸ºé“¾å¼äºŒå‰æ ‘
     TreeNode* tree2 = createBinaryTreeFromArray(tree->data, 0, tree->size);
 
-    // Êä³ö¹ã¶È±éÀú½á¹û
-    printf("¹ã¶È±éÀú½á¹û£º\n");
+    // è¾“å‡ºå¹¿åº¦éå†ç»“æœ
+    printf("å¹¿åº¦éå†ç»“æœï¼š\n");
     Layer(tree2);
     printf("\n");
 
-    // ÊÍ·ÅÄÚ´æ
+    // é‡Šæ”¾å†…å­˜
     free(tree);
     freeTree(tree2);
     
